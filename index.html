@@ -83,8 +83,9 @@
         </script>
 
         <script>
+            var slot1;
             googletag.cmd.push(function() {
-                var slot1 = googletag.defineSlot('/188641797/test', [[300, 250]], 'div-1')
+                slot1 = googletag.defineSlot('/188641797/test', [[300, 250]], 'div-1')
                 slot1.addService(googletag.pubads());
                 googletag.display('div-1');
                 refreshBid(slot1, 'div-1');
@@ -95,7 +96,7 @@
     <body>
         <h1>Individual Ad Unit Refresh Example</h1>
         <h5>Div-1</h5>
-        <p><button onclick="refreshBid()">Refresh Ad Unit</button></p>
+        <p><button onclick="refreshBid(slot1, 'div-1')">Refresh Ad Unit</button></p>
         <div id='div-1'>
         </div>
 
