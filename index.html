@@ -1,0 +1,87 @@
+<html>
+
+    <head>
+        <title>Individual Ad Unit Refresh Example</title>
+        <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
+        <script async src="//acdn.adnxs.com/prebid/not-for-prod/1/prebid.js"></script>
+        <script>
+            var sizes = [
+                [300, 250]
+            ];
+            var PREBID_TIMEOUT = 1000;
+
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+
+            var pbjs = pbjs || {};
+            pbjs.que = pbjs.que || [];
+
+            googletag.cmd.push(function() {
+                googletag.pubads().disableInitialLoad();
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+
+            var adUnit = [{
+                code: 'div-1',
+                mediaTypes: {
+                    banner: {
+                        sizes: sizes
+                    }
+                },
+                bids: [
+		{
+                    bidder: 'rubicon',
+                    params: {
+                      accountId: '14288',
+                      siteId: '189902',
+                      zoneId: '943458',
+                    },
+		},
+		{
+                    bidder: 'conversant',
+                    params: {
+                      site_id: '119315',
+                    },
+		}]
+            }];
+
+            pbjs.que.push(function() {
+                pbjs.addAdUnits(adUnit);
+            });
+
+            function refreshBid(slot, slotName) {
+                pbjs.que.push(function() {
+                    pbjs.requestBids({
+                        timeout: PREBID_TIMEOUT,
+                        adUnitCodes: [slotName],
+                        bidsBackHandler: function() {
+                            pbjs.setTargetingForGPTAsync([slotName]);
+                            googletag.pubads().refresh([slot]);
+                        }
+                    });
+                });
+            }
+        </script>
+
+        <script>
+            googletag.cmd.push(function() {
+                var slot1 = googletag.defineSlot('/188641797/test', [[300, 250]], 'div-1')
+                slot1.addService(googletag.pubads());
+                googletag.display('div-1');
+                refreshBid(slot1, 'div-1');
+            });
+        </script>
+    </head>
+
+    <body>
+        <h1>Individual Ad Unit Refresh Example</h1>
+        <h5>Div-1</h5>
+        <p><button onclick="refreshBid()">Refresh Ad Unit</button></p>
+        <div id='div-1'>
+        </div>
+
+    </body>
+
+</html>
+
