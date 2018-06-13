@@ -22,49 +22,35 @@
                 googletag.enableServices();
             });
 
-            var adUnit = [{
-                code: 'div-1',
+            var adUnit = {
                 mediaTypes: {
                     banner: {
                         sizes: sizes
                     }
                 },
                 bids: [
-                {
-                    bidder: 'appnexus',
-                    params: {
-                      placementId: '5823281'
+                    {
+                        bidder: 'appnexus',
+                        params: { placementId: '5823281' }
+                    },
+                    {
+                        bidder: 'appnexus',
+                        params: { placementId: '5823300' },
+                    },
+                    {
+                        bidder: 'appnexus',
+                        params: { placementId: '5823309' },
+                    },
+                    {
+                        bidder: 'rubicon',
+                        params: { accountId: '14288', siteId: '189902', zoneId: '943458' },
+                    },
+                    {
+                        bidder: 'conversant',
+                        params: { site_id: '119315', bidfloor: 0, secure: 0 },
                     }
-		},
-		{
-                    bidder: 'appnexus',
-                    params: {
-                      placementId: '5823300',
-                    },
-		},
-		{
-                    bidder: 'appnexus',
-                    params: {
-                      placementId: '5823309',
-                    },
-		},
-		{
-                    bidder: 'rubicon',
-                    params: {
-                      accountId: '14288',
-                      siteId: '189902',
-                      zoneId: '943458',
-                    },
-		},
-		{
-                    bidder: 'conversant',
-                    params: {
-                      site_id: '119315',
-		      bidfloor: 0,
-		      secure: 0,
-                    },
-		}]
-            }];
+                ]
+            };
 
             pbjs.que.push(function() {
                 pbjs.addAdUnits(adUnit);
