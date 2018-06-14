@@ -22,7 +22,7 @@
                 googletag.enableServices();
             });
 
-            var adUnit = [{
+            var adUnit = {
                 mediaTypes: {
                     banner: {
                         sizes: sizes
@@ -50,7 +50,7 @@
                         params: { site_id: '119315', bidfloor: 0, secure: 0 },
                     }
                 ]
-            }];
+            };
 
             pbjs.que.push(function() {
                 pbjs.addAdUnits(adUnit);
