@@ -1,121 +1,22 @@
 <html>
+<div id="eventbrite-widget-container-47980462856"></div>
 
-    <head>
-        <title>Individual Ad Unit Refresh Example</title>
-        <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
-        <script async src="//acdn.adnxs.com/prebid/not-for-prod/1/prebid.js"></script>
-        <script>
-            var sizes = [
-                [300, 250]
-            ];
-            var PREBID_TIMEOUT = 1000;
+<script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
 
-            var googletag = googletag || {};
-            googletag.cmd = googletag.cmd || [];
+<script type="text/javascript">
+   var exampleCallback = function() {
+       console.log('Order complete!');
+   };
 
-            var pbjs = pbjs || {};
-            pbjs.que = pbjs.que || [];
+   window.EBWidgets.createWidget({
+       // Required
+       widgetType: 'checkout',
+       eventId: '47980462856',
+       iframeContainerId: 'eventbrite-widget-container-47980462856',
 
-            googletag.cmd.push(function() {
-                googletag.pubads().disableInitialLoad();
-                googletag.pubads().enableSingleRequest();
-                googletag.enableServices();
-            });
-
-            var adUnit = [{
-                code: 'div-1',
-                mediaTypes: {
-                    banner: {
-                        sizes: sizes
-                    }
-                },
-                bids: [
-                {
-                    bidder: 'appnexus',
-                    params: {
-                      placementId: '13144370'
-                    }
-		},
-                {
-                    bidder: 'appnexus',
-                    params: {
-                      placementId: '5823281'
-                    }
-		},
-		{
-                    bidder: 'appnexus',
-                    params: {
-                      placementId: '5823300',
-                    },
-		},
-		{
-                    bidder: 'appnexus',
-                    params: {
-                      placementId: '5823309',
-                    },
-		},
-		{
-                    bidder: 'rubicon',
-                    params: {
-                      accountId: '14288',
-                      siteId: '189902',
-                      zoneId: '943458',
-                    },
-		},
-		{
-                    bidder: 'conversant',
-                    params: {
-                      site_id: '119315',
-		      bidfloor: 0,
-		      secure: 0,
-                    },
-		},
-		{
-                    bidder: 'onedisplay',
-                    params: {
-                      placement: '4819239',
-                      network: '11448.1',
-                    },
-		}]
-            }];
-
-            pbjs.que.push(function() {
-                pbjs.addAdUnits(adUnit);
-            });
-
-            function refreshBid(slot, slotName) {
-                pbjs.que.push(function() {
-                    pbjs.requestBids({
-                        timeout: PREBID_TIMEOUT,
-                        adUnitCodes: [slotName],
-                        bidsBackHandler: function() {
-                            pbjs.setTargetingForGPTAsync([slotName]);
-                            googletag.pubads().refresh([slot]);
-                        }
-                    });
-                });
-            }
-        </script>
-
-        <script>
-            var slot1;
-            googletag.cmd.push(function() {
-                slot1 = googletag.defineSlot('/188641797/test', [[300, 250]], 'div-1')
-                slot1.addService(googletag.pubads());
-                googletag.display('div-1');
-                refreshBid(slot1, 'div-1');
-            });
-        </script>
-    </head>
-
-    <body>
-        <h1>Individual Ad Unit Refresh Example</h1>
-        <h5>Div-1</h5>
-        <p><button onclick="refreshBid(slot1, 'div-1')">Refresh Ad Unit</button></p>
-        <div id='div-1'>
-        </div>
-
-    </body>
-
+       // Optional
+       iframeContainerHeight: 425,  // Widget height in pixels. Defaults to a minimum of 425px if not provided
+       onOrderComplete: exampleCallback  // Method called when an order has successfully completed
+   });
+</script>
 </html>
-
